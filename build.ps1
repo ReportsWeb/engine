@@ -1,7 +1,7 @@
 param(
     # Released Runtime folder (from Reports-Web-WASM.zip: Reports-Web-WASM/WebAssembly/Runtime/reports.web)
     [Parameter(Mandatory = $true)][string]$Runtime,
-    [string]$Version = '1.0.1',
+    [string]$Version = '1.0.0',
     [switch]$Push
 )
 # Stage the released runtime into ./context (not committed) and build ghcr.io/reportsweb/engine.
