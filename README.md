@@ -10,7 +10,7 @@ The Reports.Web report engine (C++ WebAssembly) as a Docker image. POST print da
 ## 起動 / Run
 
 ```sh
-docker run -d --name reports-web-engine -p 3107:3107 ghcr.io/reportsweb/engine:1.0.0
+docker run -d --name reports-web-engine -p 3107:3107 ghcr.io/reportsweb/engine:1.0.1
 curl http://127.0.0.1:3107/health        # {"status":"ok","engine":"C++ WebAssembly"}
 curl -X POST -H "Content-Type: application/json" --data-binary @print-data.json \
      http://127.0.0.1:3107/render/pdf -o report.pdf
@@ -33,7 +33,7 @@ curl -X POST -H "Content-Type: application/json" --data-binary @print-data.json 
 
 ```sh
 docker volume create reports-web-runtime
-docker run --rm -u root -v reports-web-runtime:/export ghcr.io/reportsweb/engine:1.0.0 export-runtime
+docker run --rm -u root -v reports-web-runtime:/export ghcr.io/reportsweb/engine:1.0.1 export-runtime
 ```
 
 ## 体験版と製品版 / Trial and product
@@ -43,7 +43,7 @@ docker run --rm -u root -v reports-web-runtime:/export ghcr.io/reportsweb/engine
 This image is a trial build: output carries a red "SAMPLE" mark. Mount the license file delivered on purchase:
 
 ```sh
-docker run -d -p 3107:3107 -v /path/to/reports-web.license:/app/reports-web.license:ro ghcr.io/reportsweb/engine:1.0.0
+docker run -d -p 3107:3107 -v /path/to/reports-web.license:/app/reports-web.license:ro ghcr.io/reportsweb/engine:1.0.1
 ```
 
 開発用パソコン 1 台につき 1 ライセンス、運用環境はランタイムライセンスフリーです。
@@ -57,3 +57,8 @@ Only the `Dockerfile` and documentation are here; the engine itself is distribut
 
 ---
 Pao@Office — https://www.pao.ac/ — info@pao.ac
+
+## 版 / Versions
+
+- `1.0.1`（`latest`、2026-10-03）：帳票の中のバーコードは、Barcode.wasm と同じ体験版のビルドを使います。帳票の出力は 1.0.0 と同じです。 / The embedded barcode module is the same trial build as Barcode.wasm; report output is identical to 1.0.0.
+- `1.0.0`：既に使っている環境のために残しています。新しく使う場合は 1.0.1 を指定してください。 / Kept for existing users; use 1.0.1 for new setups.

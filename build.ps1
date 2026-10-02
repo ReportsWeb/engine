@@ -1,7 +1,7 @@
 param(
     # Released Runtime folder (from Reports-Web-WASM.zip: Reports-Web-WASM/WebAssembly/Runtime/reports.web)
     [Parameter(Mandatory = $true)][string]$Runtime,
-    [string]$Version = '1.0.0',
+    [string]$Version = '1.0.1',
     [switch]$Push
 )
 # Stage the released runtime into ./context (not committed) and build ghcr.io/reportsweb/engine.
@@ -17,7 +17,7 @@ foreach ($f in 'server.mjs', 'pao-reports.wasm', 'NotoSansCJKjp-Regular.otf') {
 }
 $image = 'ghcr.io/reportsweb/engine'
 # docker writes progress to stderr; run it through cmd so PowerShell does not treat that as an error.
-cmd /c "docker build -t ${image}:$Version -t ${image}:latest `"$here`" 2>&1"
+cmd /c "docker build --build-arg VERSION=$Version -t ${image}:$Version -t ${image}:latest `"$here`" 2>&1"
 if ($LASTEXITCODE) { throw 'docker build failed' }
 if ($Push) {
     cmd /c "docker push ${image}:$Version 2>&1"; if ($LASTEXITCODE) { throw 'push failed' }

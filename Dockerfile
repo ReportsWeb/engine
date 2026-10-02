@@ -5,6 +5,7 @@
 # Without a license file the output carries a red "SAMPLE" mark. Mount the purchased license at
 # /app/reports-web.license (or set PAO_REPORTS_LICENSE_FILE) to remove it.
 FROM node:22-alpine
+ARG VERSION=1.0.1
 
 LABEL org.opencontainers.image.title="Reports.Web engine" \
       org.opencontainers.image.description="Reports.Web report engine (C++ WebAssembly): PREPEJ JSON to PDF over HTTP, plus the browser designer/previewer runtime. Trial build." \
@@ -12,7 +13,7 @@ LABEL org.opencontainers.image.title="Reports.Web engine" \
       org.opencontainers.image.url="https://www.pao.ac/reports.web/" \
       org.opencontainers.image.vendor="Pao@Office" \
       org.opencontainers.image.licenses="LicenseRef-Pao-Reports-Web-Trial" \
-      org.opencontainers.image.version="1.0.0"
+      org.opencontainers.image.version="${VERSION}"
 
 WORKDIR /app
 COPY context/server/ /app/
