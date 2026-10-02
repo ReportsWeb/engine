@@ -1,0 +1,5 @@
+#!/bin/sh
+# Copy the browser runtime (designer, previewer, fonts, barcode) to /export (a mounted volume).
+set -eu
+cp -R /opt/reports.web/. /export/
+echo "Reports.Web runtime exported to /export"
